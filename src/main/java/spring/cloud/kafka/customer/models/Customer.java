@@ -1,7 +1,6 @@
 package spring.cloud.kafka.customer.models;
 
 import javax.persistence.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Objects;
 //entity class of customer
@@ -14,19 +13,15 @@ public class Customer {
     private String companyName;
     private String address;
     private String country;
-    @OneToOne
-    @JoinColumn(name = "contact_id")
-    @JsonIgnore
-    private Contact contact;
+    private Long contact;
 
-    public Customer() {
-    }
+    public Customer() {}
 
-    public Customer(String companyName, String address, String country) {
+    public Customer(String companyName, String address, String country, Long contact) {
         this.companyName = companyName;
         this.address = address;
         this.country = country;
-        this.contact = null;
+        this.contact = contact;
     }
     //accessors and mutators
     public Long getId() {
@@ -61,11 +56,11 @@ public class Customer {
         this.country = country;
     }
     
-    public Contact getContact() {
+    public Long getContact() {
 		return contact;
 	}
 
-	public void setContact(Contact contact) {
+	public void setContact(Long contact) {
 		this.contact = contact;
 	}
 	//retrieve all the information of customer
@@ -91,11 +86,12 @@ public class Customer {
         return Objects.equals(this.id, Customer.id)
                 && Objects.equals(this.companyName, Customer.companyName)
                 && Objects.equals(this.address, Customer.address)
-                && Objects.equals(this.country, Customer.country);
+                && Objects.equals(this.country, Customer.country)
+                && Objects.equals(this.contact, Customer.contact);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.companyName, this.address, this.country);
+        return Objects.hash(this.id, this.companyName, this.address, this.country, this.contact);
     }
 }

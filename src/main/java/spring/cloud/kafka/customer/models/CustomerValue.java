@@ -9,14 +9,14 @@ public class CustomerValue
     private String companyName;
     private String address;
     private String country;
-    private ContactValue contact;
+    private Long contact;
     
-    public CustomerValue(String companyName, String address, String country) 
+    public CustomerValue(String companyName, String address, String country, Long contact) 
     {
         this.companyName = companyName;
         this.address = address;
         this.country = country;
-        this.contact = null;
+        this.contact = contact;
     }
     //accessors and mutators
     public Long getId() {
@@ -51,11 +51,11 @@ public class CustomerValue
         this.country = country;
     }
     
-    public ContactValue getContact() {
+    public Long getContact() {
 		return contact;
 	}
 
-	public void setContact(ContactValue contact) {
+	public void setContact(Long contact) {
 		this.contact = contact;
 	}
 	

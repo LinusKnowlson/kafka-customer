@@ -19,8 +19,8 @@ public class LoadDatabase {
     @Bean
     CommandLineRunner initDB(CustomerRepository repository,ContactRepository contactRepository) {
         return args -> { 	
-        	log.info("Loading... " + repository.save(new Customer("ABC Company", "221B Baker St", "United Kingdom")));
-            log.info("Loading... " + repository.save(new Customer("DEF Company", "742 Evergreen Terrace", "United States of America")));
+        	log.info("Loading... " + repository.save(new Customer("ABC Company", "221B Baker St", "United Kingdom",Long.valueOf(3))));
+            log.info("Loading... " + repository.save(new Customer("DEF Company", "742 Evergreen Terrace", "United States of America",Long.valueOf(4))));
         	log.info("Loading... " + contactRepository.save(new Contact("Mark", "Zuckerburg", "021456378", "markZuck@gmail.com", "CEO")));
             log.info("Loading... " + contactRepository.save(new Contact("Jeff", "Bezos", "049876512","jeffb@outlook.com", "President")));
         };

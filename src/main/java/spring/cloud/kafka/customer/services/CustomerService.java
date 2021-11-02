@@ -12,22 +12,18 @@ import org.springframework.stereotype.Service;
 
 import spring.cloud.kafka.customer.controllers.CustomerModelAssembler;
 import spring.cloud.kafka.customer.controllers.CustomerNotFoundException;
-import spring.cloud.kafka.customer.models.Contact;
 import spring.cloud.kafka.customer.models.Customer;
-import spring.cloud.kafka.customer.repositories.ContactRepository;
 import spring.cloud.kafka.customer.repositories.CustomerRepository;
 @Service
 public class CustomerService implements CustomerIF
 {
 	private final CustomerRepository repository;
-    private final ContactRepository contactRepository;
     private final CustomerModelAssembler assembler;
     
-    public CustomerService(CustomerRepository repository, CustomerModelAssembler assembler, ContactRepository contactRepository) 
+    public CustomerService(CustomerRepository repository, CustomerModelAssembler assembler) 
     {
     	this.repository = repository;
         this.assembler = assembler;
-        this.contactRepository = contactRepository;
     }
     
 	@Override
@@ -80,8 +76,7 @@ public class CustomerService implements CustomerIF
 	public Customer updateCustomerContact(Long id, Long contactId) {
 		// TODO Auto-generated method stub
 		Customer customer = repository.findById(id).orElseThrow(RuntimeException::new);
-        Contact contact = contactRepository.findById(contactId).orElseThrow(RuntimeException::new);
-        customer.setContact(contact);
+        customer.setContact(contactId);
         return repository.save(customer);
 	}
 }
